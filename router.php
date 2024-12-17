@@ -1,30 +1,22 @@
 <?php
 $request = $_SERVER["REQUEST_URI"];
 
-echo "request= ".$request;
-echo "</br></br>";
-
-//$request = str_replace($subFolder, "", $request);
-
-// echo "request= ".$request;
-// echo "</br></br>";
+$request = str_replace($subFolder, "", $request);
 
 switch ($request){
     case $subFolder:
     case "/":
     case "":
         $filename = __DIR__ . "/views/" . "home.php";
-        echo "FileName Home: ".$filename;
-       // require __DIR__ . "/views/home.php";
+        require __DIR__ . "/views/home.php";
         break;
     
     default:
-        $filename = __DIR__ . "/views" . $request . ".php";
-        echo "FileName Default: ".$filename;
+        $filename = __DIR__ . "/views/" . $request . ".php";
 
         if(file_exists($filename)){
-           // require $filename;
-            break;
+           require $filename;
+           break;
         }
 
         http_response_code(404);
